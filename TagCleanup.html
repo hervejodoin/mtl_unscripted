@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag Cleanup</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="toast-container position-absolute p-3 bottom-0 start-50 translate-middle-x" id="toastPlacement">
+        <div id="copiedToast" class="toast text-white bg-secondary">
+            <div class="toast-body small py-1">
+                Tags copied to clipboard.
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-md fixed-top bg-light">
+        <div class="container-fluid">
+            <a class="h1 navbar-brand text-dark" href="#">Hashtags Cleanup</a>
+            <div class="d-flex bd-highlight">
+                <button onclick="copyToClipboard('#cleanTagsList')" class="button btn btn-warning">
+                    <span class="badge p-1 bg-success" id="numberOfTags">0</span>
+                    Tags
+                </button>
+              </div>
+        </div>
+    </nav>
+
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <textarea class="form-control" name="inputTags" id="inputTags" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div id="cleanTagsList" class="mt-2"></div>
+            </div>
+        </div>
+
+    </main>
+
+
+
+
+    <!-- Bootstrap CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- JQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+    <!-- Jquery Scripts -->
+    <script>
+        $(document).ready(function () {
+            $('#inputTags').keyup(function () {
+                const cleanedTextArray = [];
+                var textToClean = $(this).val();
+                var singletonTextArray = removeDuplicates(arrayFromTagsString(textToClean));
+
+                $('#numberOfTags').text(singletonTextArray.length).toggleClass("bg-success", singletonTextArray.length <= 30).toggleClass("bg-danger", singletonTextArray.length > 30);
+                displayIGLinks(singletonTextArray);
+
+            });
+
+
+        });
+
+
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+            $("#copiedToast").toast("show");
+        }
+
+        function displayIGLinks(arr){
+            $('#cleanTagsList').empty();
+            arr.sort();
+            $.each(arr, function( index, value ) {
+                $('<a>',{
+                text: value,
+                href: 'https://www.instagram.com/explore/tags/' + value.substring(1),
+                target: '_blank',
+                class: 'ig-link text-decoration-none'
+                }).appendTo('#cleanTagsList');
+            
+                $('#cleanTagsList').append(" ");
+            
+            });           
+            
+        };
+
+    </script>
+
+    <!-- JS Scripts -->
+    <script>
+        function arrayFromTagsString(inputString) {
+            newString = inputString.replace(/^\s+|\s+$|\s+(?=\s)/g, "");
+            newString = newString.replace(/\r\n|\r|\n/g, " ");
+            newArray = newString.split(' ');
+
+            newArray.forEach(checkHasHashtag)
+            newArray.forEach(removeEmptyHashtags)
+            return newArray;
+        }
+
+        function checkHasHashtag(item, index, arr) {
+            arr[index] = item.charAt(0) == "#" ? item : "#"+item;
+        }   
+        
+        function removeEmptyHashtags(item, index, arr) {
+            if (item == "#") {
+                arr.splice(index, 1);
+            }
+        }   
+
+        function removeDuplicates(arr) {
+            return arr.filter(function (item, pos, self) {
+                return self.indexOf(item) == pos;
+            })
+        }
+
+        function convertArrayToIGLinks(arr){
+            arr.forEach(makeIGLink);
+            return arr;
+        }
+
+    </script>
+</body>
+
+<style>
+    body {
+        padding-top: 4.5rem;
+    }
+
+    .toast-container{
+        z-index: 1100;
+    }
+
+    .ig-link,.ig-link:active, .ig-link:visited, .ig-link:hover{
+        color: #3f729b;
+    }
+</style>
+
+
+
+
+
+</html>

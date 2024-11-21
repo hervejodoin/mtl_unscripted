@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag Rotator - @mtl_unscripted</title>
+
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body class="bodyStyles">
+
+    <div class="toast-container position-absolute p-3 bottom-0 start-50 translate-middle-x" id="toastPlacement">
+        <div id="copiedToast" class="toast text-white bg-secondary">
+            <div class="toast-body small py-1">
+                Tags copied to clipboard.
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-md fixed-top bg-light">
+        <div class="container-fluid">
+            <a class="h1 navbar-brand text-dark" href="#">Tag Rotator - @mtl_unscripted</a>
+            <div class="d-flex bd-highlight">
+                <button onclick="copyToClipboard('#tagslist')" class="button btn btn-warning">
+                    copy
+                </button>
+              </div>
+        </div>
+    </nav>
+
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div id="tagslist" class="mt-2"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bootstrap CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- JQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+
+    <!-- Scripts -->
+    <script>
+
+
+        const nbMtlTags = 5;
+        const nbStreetTags = 20;
+        const nbRegionTags = 3;
+
+
+        // Lists updated 2022-08-14
+
+        const mtlTags = "#514 #514mag #514mtl #514shots #Exploremontreal #MTL #MTLMoments #Montreal #Montrealjetaime #Mtl #anousmtl #cinqcentquatorze #exploremontreal #exploremtl #i_love_mtl #igersmontreal #igersmtl #igmontreal #ilovemontreal #ilovemtl #imamontrealer_sp #instamontreal #instamtl #jaimemontreal #jaimemtl #lifeinmontreal #livemontreal #livemtl #lovelifemontreal #made_IN_mtl #made_in_montreal #made_in_mtl #montreal #montreal_gallery #montreal_times #montrealartist #montrealblogger #montrealbucketlist #montrealcanada #montrealcity #montrealer #montrealforyou #montrealgallery #montreality #montrealjetaime #montreallife #montrealmoments #montrealnow #montrealonly #montrealphoto #montrealphotographer #montrealphotography #montrealpics #montrealquebec #montrealshot #montrealsnap #montrealstreet #montrealstreetphotography #montrealstreets #montrealtravelers #montrealworld #montréal #montréalquébec #moodymontreal #mtl #mtl514 #mtl_gallery #mtl_photo #mtl_zoners #mtlart #mtlartist #mtlblog #mtlblogger #mtlbloggers #mtlcity #mtleveryday #mtlguide #mtligers #mtljetaime #mtllife #mtllive #mtlmoment #mtlmoments #mtlphoto #mtlphotographer #mtlphotography #mtlprodigies #mtlshot #mtlshots #mtlstop #mtlstories #mtlstreetphotography #mtlstreets #mtlvibes #mtlview #mtlvisuals #photographiemontreal #sensemtl #somontreal #somtl #streetphotographymontreal #streetsof514 #streetsofmontreal #thismtl #tourismemontreal #tourismemtl #villedemontreal #visitmontreal #whatsupmtl #yul";
+
+        const streetTags = "#MySPC #SPiCollective #STREETGRAMMERS #StreetHunters #_streetstock #aboutstreetphotography #agameoftones #allcitiesarebeautiful #allstreetshots #artofvisuals #aspfeatures #best_moments_street #beststreets #burnmagazine #burnmyeye #capitalshooters #capturestreets #catchthemoment #challengerstreets #cinema_streets #city #city_captures #city_explore #city_features #cityaspect #citydweller #cityexplore #citygrammers #citykillerz #citylabontheground #cityphotography #cityscape #cityscapephotography #cityunit #cityview #clickcity #createexploretakeover #deceptive_cities #documentaryphotography #dpsp_street #dreaminstreets #eclectic_shotz #everybodystreet #everydayeverywhere #eye_shot_magazine #eyephotomagazine #eyeshotmag #fever_streets #filmic_streets #friendsinstreets #fromstreetswithlove #gf_streets #gramslayers #hcsc_street #hellofrom #ig_street #ig_streetphotography #igstreet #ihatestreetphotography #infinity_street #infinity_streets #insta_street #instagood #instastreet #intercollective #justgoshoot #killyourcity #lacalle_spc #larue #leagueoflenses #lensculture #lensculturestreets #lensonstreet #lensonstreets #lesgensdanslarue #life_is_street #life_is_the_street #loves_street #magicofstreets #moments_in_streetlife #moodygrams #myspc #myspc17 #myspcstory #natgeoyourshot #noicemag #nonstopstreet #opticalwander #ourmomentum #ourstreetdays #ourstreets #photoderue #photodujour #photographieurbaine #photoobserve #photooftheday #picoftheday #progressivestreet #publicspace #rawphotomag #rawstreetphotogallery #rawstreetphotography #rawurbanshots #reportagephoto #reportagephotography #rsa_streetview #rsa_streetview_ #sageofstreet #sageofstreets #scene_description #sharing_streets #shinyhappystreet #shotsdelight #shotzdelight #shutterchasers #snapthestreetbeat #somewheremagazine #spi_collective #spicollective #spjstreets #splitzine #ssicollaborative #storyofthestreet #street #street_avengers #street_focus_on #street_life #street_macadam #street_ninjas #street_perfection #street_photography #street_storytellers #street_storytelling #street_unseen #street_vision #streetart #streetcinema #streetclassics #streetculture #streetdreamsmag #streetfinder #streetframe #streetframez #streetgallerymagazine #streetgrammer #streetgrammers #streetgrammers10k #streethoney #streethunt #streethunters #streetianity #streetizm #streetleaks #streetlensmag #streetlevelphotography #streetlife #streetlife_award #streetmagazine #streetmagazines #streetmobs #streetmoment #streetmoments #streetninjas #streetoftones #streetouss #streetpassion #streetpeople #streetphoto #streetphotocollective #streetphotodiary #streetphotographer #streetphotographers #streetphotographerscommunity #streetphotographersmagazine #streetphotography #streetphotographycommunity #streetphotographyguy #streetphotographyhub #streetphotographyinternational #streetphotographyjournal #streetphotographytribe #streetphotographyworldwide #streetphotomag #streetphotopgraphy #streetphotos #streets #streets_of_our_world #streets_storytelling #streets_unseen #streets_vision #streets_vision5k #streets_visions #streetsacademy #streetsansfrontieres #streetscenesmag #streetselect #streetsfired #streetsgrammer #streetsgrammers #streetshared #streetshared5k #streetshot #streetsinworld #streetspremier #streetsstorytelling #streetstock #streetstories #streetstorytelling #streetstyle #streettogether #streetview #streetvision #streetweekly #streetxstory #streetziers #sublimestreet #supersweetstreet #sweet_street_beat #thecitymag #theimaged #thephotosector #thephotosociety #therawsociety #thestreephers #thestreethunters #thestreetphotographyhub #thestreetpr0ject #thinkverylittle #throughthelens #timeless_street #timeless_streets #tnscollective #topstreetworld #total_streets #travelphotography #untoldstreets #urban_addicts #urban_capture #urbanaisle #urbanandstreet #urbanexplorers #urbanlife #urbanphoto #urbanphotographer #urbanphotography #urbanromantix #urbanstreetphotogallery #urbanstreetphotography #visualambassadors #visualcultmagazine #visualgrams #walkingaroundthecity #way2ill #wearethestreet #wearethestreets #widystreet #woofermagazine #worldviewmag #yourshotphotographer #zonestreet #zonestreets";
+
+        const regionTags = "#authentikcanada #bonjourquebec #boquebec #canada #canadaexplored #canadalife #canadaparadise #canadaphotography #canadastreetphotography #canadaswonderland #canada🇨🇦 #canadianphotography #cheznousauquebec #clicquebec #explore_canada #explore_quebec #explorecanada #explorequebec #igcanada_ #igerscanada #igersquebec #imageofcanada #imagesofcanada #livelovecanada #loves_canada #narcitycanada #narcityquebec #qc #quebec #quebeccanada #quebecenphotos #quebecoriginal #quebecphotographie #quebecshot #quebecstreet #sharecangeo #streetsofcanada #tourcanada #tourismquebec";
+        
+        outputMtlTagsArray = getRandom(removeDuplicates(arrayFromTagsString(mtlTags)), nbMtlTags);
+        outputStreetTagsArray = getRandom(removeDuplicates(arrayFromTagsString(streetTags)), nbStreetTags);
+        outputRegionTagsArray = getRandom(removeDuplicates(arrayFromTagsString(regionTags)), nbRegionTags);
+        
+
+        $(document).ready(function () {
+            $('#tagslist').empty();
+            console.log(outputMtlTagsArray);
+            displayIGLinks(outputMtlTagsArray);
+            displayIGLinks(outputStreetTagsArray);
+            displayIGLinks(outputRegionTagsArray);
+            });
+
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+            $("#copiedToast").toast("show");
+        }
+
+        function displayIGLinks(arr){
+            $.each(arr, function( index, value ) {
+                $('<a>',{
+                text: value,
+                href: 'https://www.instagram.com/explore/tags/' + value.substring(1),
+                target: '_blank',
+                class: 'ig-link text-decoration-none'
+                }).appendTo('#tagslist');
+                $('#tagslist').append(" ");
+            });           
+        };
+    
+        function arrayFromTagsString(inputString) {
+            newString = inputString.replace(/^\s+|\s+$|\s+(?=\s)/g, "");
+            newString = newString.replace(/\r\n|\r|\n/g, " ");
+            newArray = newString.split(' ');
+
+            newArray.forEach(checkHasHashtag)
+            newArray.forEach(removeEmptyHashtags)
+            return newArray;
+        }
+
+        function checkHasHashtag(item, index, arr) {
+            arr[index] = item.charAt(0) == "#" ? item : "#"+item;
+        }   
+        
+        function removeEmptyHashtags(item, index, arr) {
+            if (item == "#") {
+                arr.splice(index, 1);
+            }
+        } 
+
+        function removeDuplicates(arr){
+            return arr.filter(function(item, pos, self) {
+                return self.indexOf(item) == pos;
+            })
+        }
+
+        function convertArrayToIGLinks(arr){
+            arr.forEach(makeIGLink);
+            return arr;
+        }
+
+        function getRandom(arr, n) {
+            var result = new Array(n),
+                len = arr.length,
+                taken = new Array(len);
+            if (n > len)
+                throw new RangeError("getRandom: more elements taken than available");
+            while (n--) {
+                var x = Math.floor(Math.random() * len);
+                result[n] = arr[x in taken ? taken[x] : x];
+                taken[x] = --len in taken ? taken[len] : len;
+            }
+            return result;
+        }   
+
+    </script>
+
+</body>
+
+
+
+<style>
+    body {
+        padding-top: 4.5rem;
+    }
+
+    .toast-container{
+        z-index: 1100;
+    }
+
+    .ig-link,.ig-link:active, .ig-link:visited, .ig-link:hover{
+        color: #3f729b;
+    }
+</style>
+
+</html>
